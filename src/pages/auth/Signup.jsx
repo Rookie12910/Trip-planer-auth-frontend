@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
-import '../styles/auth.css';
+import AuthContext from '../../context/AuthContext';
+import '../../styles/auth.css';
 
 const Signup = () => {
   const [showForm, setShowForm] = useState(false);
@@ -28,7 +28,7 @@ const Signup = () => {
       setError('');
       setLoading(true);
       await signup(email, password, { fullName, username, address });
-      navigate('/login');
+      navigate('/auth/login');
     } catch (error) {
       setError('Failed to create an account');
       console.error(error);
@@ -51,15 +51,28 @@ const Signup = () => {
   };
 
   return (
+    <>
+    <header className="auth-header">
+        <div className="logo">Trip Planner</div>
+      </header>
     <div className="auth-container">
       <div className="auth-card signup-card">
+
         <h1>Create an Account</h1>
         <p>Join us and start planning your trips</p>
         
         {error && <div className="error-message">{error}</div>}
         
         {!showForm ? (
+          
           <div className="signup-options">
+            <button 
+            className="auth-close-btn" 
+            onClick={() => navigate('/')}
+            aria-label="Close"
+          >
+            ×
+          </button>
             <button 
               onClick={handleGoogleSignup} 
               className="btn-google" 
@@ -165,10 +178,11 @@ const Signup = () => {
         )}
         
         <div className="auth-footer">
-          <p>Already have an account? <Link to="/login">Login</Link></p>
+          <p>Already have an account? <Link to="/auth/login">Login</Link></p>
         </div>
       </div>
     </div>
+    </>
   );
 };
 

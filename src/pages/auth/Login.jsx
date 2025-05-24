@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
-import '../styles/auth.css';
+import AuthContext from '../../context/AuthContext';
+import '../../styles/auth.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -27,8 +27,19 @@ const Login = () => {
   };
 
   return (
+    <>
+    <header className="auth-header">
+        <div className="logo">Trip Planner</div>
+      </header>
     <div className="auth-container">
       <div className="auth-card">
+         <button 
+            className="auth-close-btn" 
+            onClick={() => navigate('/')}
+            aria-label="Close"
+          >
+            ×
+          </button>
         <h1>Welcome Back</h1>
         <p>Login to plan your next adventure</p>
         
@@ -67,10 +78,11 @@ const Login = () => {
         </form>
         
         <div className="auth-footer">
-          <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
+          <p>Don't have an account? <Link to="/auth/signup">Sign up</Link></p>
         </div>
       </div>
     </div>
+    </>
   );
 };
 
